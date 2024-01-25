@@ -12,13 +12,10 @@ class ApplicationController < ActionController::API
         render json: { errors: ["Not authorized"] }, status: :unauthorized unless @current_user
       end
 
-      def authorize_user
-        review = Review.find(params[:id])
-        render json: { error: 'Unauthorized' }, status: :unauthorized unless @current_user === review.user
-      end
     
       def render_unprocessable_entity_response(exception)
         render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
       end
+
 
 end
