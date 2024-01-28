@@ -20,8 +20,12 @@ function Profile() {
   return (
     <div>
         <h1>My Profile</h1>
-        <p>Welcome: {currentUser.username}</p>
+        <hr></hr>
+        <h2>Welcome: {currentUser.username}</h2>
         <button onClick={handleLogOutClick}>Log Out</button>
+        <h3>My Games</h3>
+        <h3>My Consoles</h3>
+        <h3>My Genres</h3>
     </div>
   )
 }

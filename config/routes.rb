@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   get "/consoles", to: "consoles#index"
+  get "/games", to: "games#index"
 
   
   # Routing logic: fallback requests for React Router.
