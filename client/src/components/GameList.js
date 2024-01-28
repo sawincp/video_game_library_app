@@ -1,12 +1,6 @@
-import React from 'react'
+import React,{useState} from 'react'
 
-const GameList = ({currentGameList}) => {
-
-  console.log(currentGameList)
-
-  if(!currentGameList){
-    return <div>Loading...</div>
-  }
+const GameList = ({ onAddGame, currentGameList }) => {
 
   return (
     <div>Game Library</div>

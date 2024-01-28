@@ -4,9 +4,14 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  
+  resources :games do
+    resources :consoles, only: [:index, :show]
+    resources :genres, only: [:index, :show]
+  end
 
-  get "/consoles", to: "consoles#index"
-  get "/games", to: "games#index"
+  resources :consoles
+  resources :genres
 
   
   # Routing logic: fallback requests for React Router.

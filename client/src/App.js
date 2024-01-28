@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState} from 'react'
 import { useRecoilState } from 'recoil';
 import { userState } from './state/atoms/UserState';
 import { gameListState } from './state/atoms/GameListState';
@@ -15,6 +15,7 @@ function App() {
 
   const [currentUser, setCurrentUser]= useRecoilState(userState)
   const [currentGameList, setCurrentGameList]= useRecoilState(gameListState)
+  const [consoles, setConsoles]= useState([])
 
   useEffect(() => {
     // auto-login
@@ -35,6 +36,19 @@ function App() {
       });
   }, []);
 
+  useEffect(()=>{
+    axios.get('/consoles')
+    .then(response =>{
+      // console.log(response.data)
+      setConsoles(response.data)
+    })
+  },[])
+
+  function handleAddGame(newGame){
+    setCurrentGameList((prevGames)=> [...prevGames, newGame])
+
+  }
+
   return (
     <div>
       {currentUser ? (
@@ -42,8 +56,8 @@ function App() {
           <NavBar />
           <Routes>
             <Route exact path="/" element={<Profile />} />
-            <Route exact path="/consoles" element={<ConsoleList />} />
-            <Route exact path='/games' element={<GameList currentGameList={currentGameList} />} />
+            <Route exact path="/consoles" element={<ConsoleList consoles ={consoles} />} />
+            <Route exact path='/games' element={<GameList currentGameList={currentGameList}  onAddGame ={handleAddGame}/>} />
           </Routes>
         </>
       ) : (
