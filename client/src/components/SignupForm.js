@@ -20,12 +20,12 @@ const SignUpForm = () => {
                 setErrors(null)
             })
             .catch((error)=>{
-                console.log(error.response.data.errors)
-                setErrors(error)
+                // console.log(error.response.data.errors)
+                setErrors(error.response.data.errors)
             })
         }}
         >
-            {({isSubmitting})=>(
+            {/* {({isSubmitting})=>(
                 <Form>
                     <Field type='username' name='username' placeholder="Username"/>
                     <Field type= 'password' name='password' placeholder= 'Password'/>
@@ -33,7 +33,14 @@ const SignUpForm = () => {
                         Sign Up
                     </button>
                 </Form>
-            )}
+            )} */}
+
+                <Form>
+                    <Field type='username' name='username' placeholder="Username"/>
+                    <Field type= 'password' name='password' placeholder= 'Password'/>
+                    <button type='submit'>Sign Up</button>
+                    <h1>{errors}</h1>
+                </Form>
         </Formik>
     )
 }

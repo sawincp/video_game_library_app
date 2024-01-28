@@ -6,14 +6,14 @@ import axios from 'axios';
 function Profile() {
     const [currentUser, setCurrentUser]= useRecoilState(userState)
 
-    console.log(currentUser)
+    // console.log(currentUser)
 
     async function handleLogOutClick(){
         try{
             await axios.delete('/logout')
             setCurrentUser(null)
         } catch(error){
-            console.error("logout errr:", error)
+            console.error("logout error:", error)
         }
     }
 

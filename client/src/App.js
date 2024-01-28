@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil';
 import { userState } from './state/atoms/UserState';
+import {Routes, Route} from 'react-router-dom'
 
 import Login from './components/Login';
 import Profile from './components/Profile';
+import NavBar from './components/NavBar';
+import ConsoleList from './components/ConsoleList';
 
 function App() {
 
@@ -19,10 +22,18 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div>
       {currentUser ? (
-        <Profile />
-      ):(<Login />)}
+        <>
+          <NavBar />
+          <Routes>
+            <Route exact path="/" element={<Profile />} />
+            <Route exact path="/consoles" element={<ConsoleList />} />
+          </Routes>
+        </>
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }
