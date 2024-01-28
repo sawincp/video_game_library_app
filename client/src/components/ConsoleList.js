@@ -2,7 +2,7 @@ import React from 'react'
 
 function ConsoleList() {
   return (
-    <div>ConsoleList</div>
+    <div>Consoles</div>
   )
 }
 

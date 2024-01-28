@@ -6,7 +6,7 @@ function NavBar() {
     <div>
         <NavLink to='/'>Profile |</NavLink>
         <NavLink to='/consoles'> Consoles| </NavLink>
-        <NavLink to ='/games' >Games Library</NavLink>
+        <NavLink to ='/games' >Game Library</NavLink>
     </div>
   )
 }
