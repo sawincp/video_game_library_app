@@ -3,5 +3,5 @@ class Genre < ApplicationRecord
     has_many :users, through: :games
     has_many :consoles, through: :games
 
-    validates :type, presence: true
+    validates :genre_type, presence: true, allow_blank: true
 end

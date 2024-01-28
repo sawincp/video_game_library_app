@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_22_205134) do
+ActiveRecord::Schema.define(version: 2024_01_28_190615) do
 
   create_table "consoles", force: :cascade do |t|
     t.string "platform"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2024_01_22_205134) do
   end
 
   create_table "genres", force: :cascade do |t|
-    t.string "type"
+    t.string "genre_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
