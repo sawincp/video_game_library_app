@@ -6,7 +6,8 @@ function NavBar() {
     <div>
         <NavLink to='/'>Profile |</NavLink>
         <NavLink to='/consoles'> Consoles| </NavLink>
-        <NavLink to ='/games' >Game Library</NavLink>
+        <NavLink to ='/games' >Game Library|</NavLink>
+        <NavLink to='/genres'>Game Genres</NavLink>
     </div>
   )
 }
