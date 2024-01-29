@@ -60,9 +60,19 @@ function App() {
     })
   },[])
 
-  function handleAddGame(newGame){
-    setCurrentGameList((prevGames)=> [...prevGames, newGame])
-  }
+  // console.log("Genres:", genres)
+
+  // function handleAddGame(newGame) {
+  //   // Send POST request to API with new game data
+  //   axios.post('/games', newGame)
+  //     .then(response => {
+  //       // Update game list state directly with response data
+  //       setCurrentGameList(prevList => [...prevList, response.data]);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }
 
   return (
     <div>
@@ -71,8 +81,8 @@ function App() {
           <NavBar />
           <Routes>
             <Route exact path="/" element={<Profile />} />
-            <Route exact path="/consoles" element={<ConsoleList consoles ={consoles} />} />
-            <Route exact path='/games' element={<GameList currentGameList={currentGameList}  onAddGame ={handleAddGame}/>} />
+            <Route exact path="/consoles" element={<ConsoleList games={currentGameList} consoles ={consoles} />} />
+            <Route exact path='/games' element={<GameList consoles={consoles} genres={genres} />} />
             <Route exact path='/genres' element= {<GenreList genres={genres} />}/>
           </Routes>
         </>
