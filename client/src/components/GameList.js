@@ -1,9 +1,11 @@
-import React,{useState} from 'react'
+import React from 'react'
 
-const GameList = ({ onAddGame, currentGameList }) => {
+const GameList = () => {
 
   return (
-    <div>Game Library</div>
+    <div>
+      <h1>Game Library</h1>
+    </div>
   )
 }
 

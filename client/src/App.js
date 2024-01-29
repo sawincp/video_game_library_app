@@ -19,14 +19,15 @@ function App() {
   const [consoles, setConsoles]= useState([])
   const [genres, setGenres] = useState([])
 
-  useEffect(() => {
-    // auto-login
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((currentUser) => setCurrentUser(currentUser));
-      }
-    });
-  }, []);
+  useEffect(()=>{
+    axios.get('/me')
+    .then(r =>{
+      setCurrentUser(r.data)
+    })
+    .catch(error =>{
+      console.error(error)
+    })
+  },[])
 
   useEffect(() => {
     axios.get('/games')
@@ -44,6 +45,9 @@ function App() {
       // console.log(response.data)
       setConsoles(response.data)
     })
+    .catch(error =>{
+      console.error(error)
+    })
   },[])
 
   useEffect(()=>{
@@ -51,11 +55,13 @@ function App() {
     .then(response => {
       setGenres(response.data)
     })
+    .catch(error =>{
+      console.error(error)
+    })
   },[])
 
   function handleAddGame(newGame){
     setCurrentGameList((prevGames)=> [...prevGames, newGame])
-
   }
 
   return (
