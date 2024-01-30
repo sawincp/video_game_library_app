@@ -15,7 +15,7 @@ const GameList = ({games, consoles, genres }) => {
   }
 
   const listOfGames = games.map((game) => {
-    return ( // Add the return statement
+    return (
       <div key={game.id}>
         <Link to={`/games/${game.id}`}>{game.title}</Link>
       </div>

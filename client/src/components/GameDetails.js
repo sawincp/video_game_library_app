@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 
 function GameDetails({games}) {
@@ -21,6 +22,9 @@ function GameDetails({games}) {
             <img src={game.cover_art} />
             <p>Release Date: {game.release_date}</p>
             <p>Notes: {game.notes}</p>
+            <Link to={`/consoles/${game.console.id}/games`}>
+                <p>Platform: {game.console.platform}</p>
+            </Link>
             </>
         ): (
             <p>Game not found</p>

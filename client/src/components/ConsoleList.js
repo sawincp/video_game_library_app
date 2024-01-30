@@ -1,20 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function ConsoleList({ consoles }) {
   
-  const consoleList = consoles.map((c) => {
-    return ( // Add the return statement
-      <div key={c.id}>
-        <Link to={`/consoles/${c.id}`}>{c.platform}</Link>
-      </div>
-    );
-  });
+  // console.log(consoles)
+  const params = useParams()
+  const consoleId = Number(params.id)
+  const platform = consoles.find((c)=> c.id === consoleId)
+
+  console.log(platform)
+
 
   return (
     <div>
-      <h1>Consoles</h1>
-      {consoleList}
+      <h1>{platform.platform} Games</h1>
+      <ul>
+        {platform.games.map((game) => (
+          <li key={game.id}>{game.title}</li>
+        ))}
+      </ul>
     </div>
   );
 }

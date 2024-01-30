@@ -78,7 +78,7 @@ function App() {
             <Route exact path= '/games/:id' element={<GameDetails games={currentGameList} />}/>
             
             
-            <Route exact path="/consoles" element={<ConsoleList  consoles={consoles} />} />
+            <Route exact path="/consoles/:id/games" element={<ConsoleList  consoles={consoles} />} />
             <Route exact path='/genres' element= {<GenreList genres={genres} />}/>
           </Routes>
         </>
