@@ -2,14 +2,10 @@ import React, { useState } from 'react'
 import NewGame from './NewGame'
 
 const GameList = ({games, consoles, genres }) => {
+
+  console.log(consoles)
   
   const [newGameForm, setNewGameForm]= useState(false)
-
-  // console.log("genres:", genres)
-
-  // if(!games){
-  //   setNewGameForm(true)
-  // }
 
   function handleNewGameForm(){
     setNewGameForm(!newGameForm)

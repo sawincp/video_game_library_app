@@ -9,6 +9,10 @@ function NewGame({ consoles, genres }) {
   const [gameList, setGameList] = useRecoilState(gameListState);
   const [errors, setErrors] = useState(null);
 
+  console.log("Console Data:", consoles)
+
+// console.log(consoles)
+
   return (
     <Formik
       initialValues={{
@@ -20,14 +24,8 @@ function NewGame({ consoles, genres }) {
         genre_id: '',
       }}
       onSubmit={(values, { setSubmitting }) => {
-        axios.post('/games',{
-          title: values.title,
-          coverArt: values.coverArt,
-          releaseDate: values.releaseDate,
-          notes: values.notes,
-          consoleId: values.console_id, // Include consoleId directly
-          genreId: values.genre_id, // Include genreId directly
-        })
+        setSubmitting(true)
+        axios.post('/games',values)
           .then((res) => {
             console.log(res)
             setGameList(res.data);
@@ -40,32 +38,42 @@ function NewGame({ consoles, genres }) {
           });
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, handleChange }) => (
         <Form>
           {/* Display errors if they exist */}
           {errors && <div className="error">{errors.message}</div>}
 
           <Field name="title" type="text" placeholder="Enter Game Title" />
-          <Field name="cover_art" type="url" placeholder="Cover Art URL" />
+          <Field name="cover_art" type="text" placeholder="Cover Art URL" />
           <Field name="release_date" type="date" placeholder="Release Date" />
           
-
-          <Select
-            options={consoles.map((console) => ({
-            value: console.id, // Replace with appropriate value identifier
-            label: console.platform, // Replace with appropriate label property
-        }))}
+          <Field
+            as="select"
             name="console_id"
-            placeholder="Select Console"
-       />
-          <Select
-            options={genres.map((genre) => ({
-            value: genre.id, // Replace with appropriate value identifier
-            label: genre.genre_type, // Replace with appropriate label property
-         }))}
+            type="number"
+            placeholder="Enter Console"
+          >
+            {consoles.map((c) => (
+              <option key={c.id} value={c.id}>
+              {c.platform}
+              </option>
+            ))}
+          </Field>
+           
+          <Field 
+            as="select" 
             name="genre_id"
-            placeholder="Select Genre"
-       />          
+            type="number"
+            placeholder="Enter Genre"
+            >
+            {genres.map((g) => (
+              <option key={g.id} value={g.id}>
+              {g.genre_type}
+              </option>
+            ))}
+          </Field>
+             
+       
           
           <Field name="notes" type="text" placeholder="Notes" as="textarea" />
 
@@ -76,6 +84,33 @@ function NewGame({ consoles, genres }) {
       )}
     </Formik>
   );
-}
+
+  // return (
+  //   <Formik
+  //     initialValues={{ selectedId: '' }} // Initialize selectedId with an empty string
+  //     onSubmit={(values) => {
+  //       console.log('Submitted values:', values); // This will now include the selectedId
+  //     }}
+  //   >
+  //     {({ values }) => (
+  //       <Form>
+  //         {/* ... other form fields ... */}
+
+  //         <Field as="select" name="selectedId">
+  //           {/* Populate options from your data source */}
+  //           <option value="">-- Select an option --</option>
+  //           {consoles.map((c) => (
+  //             <option key={c.id} value={c.id}>
+  //               {c.value}
+  //             </option>
+  //           ))}
+  //         </Field>
+
+  //         <button type="submit">Submit</button>
+  //       </Form>
+  //     )}
+  //   </Formik>
+  // );
+};
 
 export default NewGame;

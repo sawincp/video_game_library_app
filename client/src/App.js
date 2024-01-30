@@ -2,6 +2,7 @@ import React, { useEffect, useState} from 'react'
 import { useRecoilState } from 'recoil';
 import { userState } from './state/atoms/UserState';
 import { gameListState } from './state/atoms/GameListState';
+import { consoleState } from './state/atoms/ConsoleState';
 import {Routes, Route} from 'react-router-dom'
 import axios from 'axios';
 
@@ -60,19 +61,8 @@ function App() {
     })
   },[])
 
-  // console.log("Genres:", genres)
-
-  // function handleAddGame(newGame) {
-  //   // Send POST request to API with new game data
-  //   axios.post('/games', newGame)
-  //     .then(response => {
-  //       // Update game list state directly with response data
-  //       setCurrentGameList(prevList => [...prevList, response.data]);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }
+ 
+  // console.log(consoles)
 
   return (
     <div>
@@ -82,7 +72,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Profile />} />
             <Route exact path="/consoles" element={<ConsoleList games={currentGameList} consoles ={consoles} />} />
-            <Route exact path='/games' element={<GameList consoles={consoles} genres={genres} />} />
+            <Route exact path='/games' element={<GameList genres={genres} consoles={consoles}/>} />
             <Route exact path='/genres' element= {<GenreList genres={genres} />}/>
           </Routes>
         </>
