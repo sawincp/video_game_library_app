@@ -1,19 +1,26 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import NewGame from './NewGame'
 
 const GameList = ({games, consoles, genres }) => {
  
   const [newGameForm, setNewGameForm]= useState(false)
 
+  if (!games) {
+    return <div>Loading...</div>;
+  }
+
   function handleNewGameForm(){
     setNewGameForm(!newGameForm)
   }
 
-  const listOfGames = games.map(game =>(
-    <div key={game.id}>
-      <h3>{game.title}</h3>
-    </div>
-  ))
+  const listOfGames = games.map((game) => {
+    return ( // Add the return statement
+      <div key={game.id}>
+        <Link to={`/games/${game.id}`}>{game.title}</Link>
+      </div>
+    );
+  });
 
   return (
     <div>

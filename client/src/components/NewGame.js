@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Formik, Field, Form } from 'formik'; // Import Form component for error display
+import { Formik, Field, Form, resetForm } from 'formik';
 import { useRecoilState } from 'recoil';
 import { gameListState } from '../state/atoms/GameListState';
-import Select from 'react-select';
 import axios from 'axios';
 
 function NewGame({ consoles, genres }) {
@@ -18,14 +17,15 @@ function NewGame({ consoles, genres }) {
         console_id: '',
         genre_id: '',
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         setSubmitting(true)
         axios.post('/games',values)
           .then((res) => {
-            // console.log(res.data)
-            setGameList(res.data);
+            console.log(res.data)
+            const updatedGameList = [...gameList, res.data]
+            setGameList(updatedGameList);
             setSubmitting(false);
-            // Reset errors after successful submission
+            resetForm()
             setErrors(null);
           })
           .catch((error) => {
@@ -33,11 +33,10 @@ function NewGame({ consoles, genres }) {
           });
       }}
     >
-      {({ isSubmitting, handleChange }) => (
+      {({ isSubmitting }) => (
         <Form>
-          {/* Display errors if they exist */}
-          {errors && <div className="error">{errors.message}</div>}
-
+          <h1>{errors}</h1>
+         
           <Field name="title" type="text" placeholder="Enter Game Title" />
           <Field name="cover_art" type="text" placeholder="Cover Art URL" />
           <Field name="release_date" type="date" placeholder="Release Date" />
@@ -46,7 +45,7 @@ function NewGame({ consoles, genres }) {
             as="select"
             name="console_id"
             type="number"
-            placeholder="Enter Console"
+            placeholder="Choose Console"
           >
             {consoles.map((c) => (
               <option key={c.id} value={c.id}>
@@ -59,7 +58,7 @@ function NewGame({ consoles, genres }) {
             as="select" 
             name="genre_id"
             type="number"
-            placeholder="Enter Genre"
+            placeholder="Choose Genre"
             >
             {genres.map((g) => (
               <option key={g.id} value={g.id}>
@@ -76,32 +75,6 @@ function NewGame({ consoles, genres }) {
     </Formik>
   );
 
-  // return (
-  //   <Formik
-  //     initialValues={{ selectedId: '' }} // Initialize selectedId with an empty string
-  //     onSubmit={(values) => {
-  //       console.log('Submitted values:', values); // This will now include the selectedId
-  //     }}
-  //   >
-  //     {({ values }) => (
-  //       <Form>
-  //         {/* ... other form fields ... */}
-
-  //         <Field as="select" name="selectedId">
-  //           {/* Populate options from your data source */}
-  //           <option value="">-- Select an option --</option>
-  //           {consoles.map((c) => (
-  //             <option key={c.id} value={c.id}>
-  //               {c.value}
-  //             </option>
-  //           ))}
-  //         </Field>
-
-  //         <button type="submit">Submit</button>
-  //       </Form>
-  //     )}
-  //   </Formik>
-  // );
 };
 
 export default NewGame;

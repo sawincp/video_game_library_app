@@ -1,20 +1,22 @@
-import React from 'react'
-import { useRecoilValue } from 'recoil';
-import { consoleState } from '../state/atoms/ConsoleState';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function ConsoleList({consoles}) {
+function ConsoleList({ consoles }) {
   
+  const consoleList = consoles.map((c) => {
+    return ( // Add the return statement
+      <div key={c.id}>
+        <Link to={`/consoles/${c.id}`}>{c.platform}</Link>
+      </div>
+    );
+  });
 
-return (
-  <div>
-    <h1>Consoles</h1>
-   {consoles.map((c)=>{
-    return(
-      <ul key={c.id}>{c.platform}</ul>
-    )
-   })}
-  </div>
-);
+  return (
+    <div>
+      <h1>Consoles</h1>
+      {consoleList}
+    </div>
+  );
 }
 
-export default ConsoleList
+export default ConsoleList;

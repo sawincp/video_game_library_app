@@ -8,8 +8,11 @@ import axios from 'axios';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import NavBar from './components/NavBar';
-import ConsoleList from './components/ConsoleList';
 import GameList from './components/GameList';
+import GameDetails from './components/GameDetails';
+
+
+import ConsoleList from './components/ConsoleList';
 import GenreList from './components/GenreList';
 
 function App() {
@@ -61,7 +64,7 @@ function App() {
   },[])
 
  
-  console.log(currentGameList)
+  // console.log("Current games:", currentGameList)
 
   return (
     <div>
@@ -70,8 +73,12 @@ function App() {
           <NavBar />
           <Routes>
             <Route exact path="/" element={<Profile />} />
-            <Route exact path="/consoles" element={<ConsoleList  consoles ={consoles} />} />
             <Route exact path='/games' element={<GameList games={currentGameList} genres={genres} consoles={consoles}/>} />
+            
+            <Route exact path= '/games/:id' element={<GameDetails games={currentGameList} />}/>
+            
+            
+            <Route exact path="/consoles" element={<ConsoleList  consoles={consoles} />} />
             <Route exact path='/genres' element= {<GenreList genres={genres} />}/>
           </Routes>
         </>

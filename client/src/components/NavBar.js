@@ -5,9 +5,9 @@ function NavBar() {
   return (
     <div>
         <NavLink to='/'>Profile |</NavLink>
-        <NavLink to='/consoles'> Consoles| </NavLink>
         <NavLink to ='/games' >Game Library|</NavLink>
-        <NavLink to='/genres'>Game Genres</NavLink>
+        <NavLink to='/consoles'> Consoles| </NavLink>
+        <NavLink to='/genres'> Genres</NavLink>
     </div>
   )
 }
