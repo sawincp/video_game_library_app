@@ -2,20 +2,18 @@ import React, { useState } from 'react'
 import NewGame from './NewGame'
 
 const GameList = ({games, consoles, genres }) => {
-
-  console.log(consoles)
-  
+ 
   const [newGameForm, setNewGameForm]= useState(false)
 
   function handleNewGameForm(){
     setNewGameForm(!newGameForm)
   }
 
-  // const listOfGames = games.map(game =>(
-  //   <div key={game.id}>
-  //     <h3>{game.title}</h3>
-  //   </div>
-  // ))
+  const listOfGames = games.map(game =>(
+    <div key={game.id}>
+      <h3>{game.title}</h3>
+    </div>
+  ))
 
   return (
     <div>
@@ -25,7 +23,7 @@ const GameList = ({games, consoles, genres }) => {
       {newGameForm ? (
         <NewGame consoles={consoles} genres={genres}/>
       ): null}
-      {/* {listOfGames} */}
+      {listOfGames}
     </div>
   )
 }

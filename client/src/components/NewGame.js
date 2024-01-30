@@ -8,11 +8,6 @@ import axios from 'axios';
 function NewGame({ consoles, genres }) {
   const [gameList, setGameList] = useRecoilState(gameListState);
   const [errors, setErrors] = useState(null);
-
-  console.log("Console Data:", consoles)
-
-// console.log(consoles)
-
   return (
     <Formik
       initialValues={{
@@ -27,7 +22,7 @@ function NewGame({ consoles, genres }) {
         setSubmitting(true)
         axios.post('/games',values)
           .then((res) => {
-            console.log(res)
+            // console.log(res.data)
             setGameList(res.data);
             setSubmitting(false);
             // Reset errors after successful submission
@@ -71,12 +66,8 @@ function NewGame({ consoles, genres }) {
               {g.genre_type}
               </option>
             ))}
-          </Field>
-             
-       
-          
+          </Field>   
           <Field name="notes" type="text" placeholder="Notes" as="textarea" />
-
           <button type="submit" disabled={isSubmitting}>
             Add Game
           </button>

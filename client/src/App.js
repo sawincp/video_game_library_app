@@ -2,7 +2,6 @@ import React, { useEffect, useState} from 'react'
 import { useRecoilState } from 'recoil';
 import { userState } from './state/atoms/UserState';
 import { gameListState } from './state/atoms/GameListState';
-import { consoleState } from './state/atoms/ConsoleState';
 import {Routes, Route} from 'react-router-dom'
 import axios from 'axios';
 
@@ -62,7 +61,7 @@ function App() {
   },[])
 
  
-  // console.log(consoles)
+  console.log(currentGameList)
 
   return (
     <div>
@@ -71,8 +70,8 @@ function App() {
           <NavBar />
           <Routes>
             <Route exact path="/" element={<Profile />} />
-            <Route exact path="/consoles" element={<ConsoleList games={currentGameList} consoles ={consoles} />} />
-            <Route exact path='/games' element={<GameList genres={genres} consoles={consoles}/>} />
+            <Route exact path="/consoles" element={<ConsoleList  consoles ={consoles} />} />
+            <Route exact path='/games' element={<GameList games={currentGameList} genres={genres} consoles={consoles}/>} />
             <Route exact path='/genres' element= {<GenreList genres={genres} />}/>
           </Routes>
         </>
