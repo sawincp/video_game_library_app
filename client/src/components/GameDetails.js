@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { gameListState } from '../state/atoms/GameListState';
 import EditNoteForm from './EditNoteForm'
+import axios from 'axios';
 
 
 function GameDetails() {
+    const [games, setGames]=useRecoilState(gameListState)
     
     const [isEditing, setIsEditing]= useState(false)
-    // const [currentGameList, setCurrentGameList]= useRecoilState(gameListState)
     const [error, setError] = useState(null);
 
     const params= useParams()
@@ -18,6 +19,18 @@ function GameDetails() {
     const game = gameList.find((g)=>g.id === gameId)
 
     console.log(game)
+
+    const handleDeleteNote = async () => {
+        try {
+          await axios.delete(`/games/${gameId}`);
+          setGames((currentGames) =>
+            currentGames.map((g) => (g.id === gameId ? { ...g, notes: '' } : g))
+          );
+        } catch (error) {
+          console.log(error);
+        //   setError();
+        }
+      };
 
   return (
     <div>
@@ -33,6 +46,11 @@ function GameDetails() {
             
             <button onClick={()=> setIsEditing((isEditing)=>!isEditing)}>
                 <span role="img" aria-label="edit">✏️</span>
+            </button>
+            <button onClick={handleDeleteNote}>
+                <span role="img" aria-label="delete">
+                    🗑
+                </span>
             </button>
             {isEditing ?(
                 <EditNoteForm gameId={gameId} />

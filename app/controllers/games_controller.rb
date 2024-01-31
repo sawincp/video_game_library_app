@@ -21,6 +21,12 @@ class GamesController < ApplicationController
         end
     end
 
+    def destroy
+        note = @current_user.games.find(params[:id])
+        note.destroy
+        head :no_content    
+    end
+
     private
 
     def game_params
