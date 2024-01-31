@@ -24,11 +24,11 @@ function GameDetails({games}) {
             <p>Notes: {game.notes}</p>
             
             <Link to={`/consoles/${game.console.id}/games`}>
-                <p>Platform: {game.console.platform}</p>
+                <p>Find More Games on: {game.console.platform}</p>
             </Link>
             
             <Link to={`/genres/${game.genre.id}/games`}>
-                <p>Genre: {game.genre.genre_type}</p>
+                <p>Find More Games like: {game.genre.genre_type}</p>
             </Link>
             </>
         ): (

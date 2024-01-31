@@ -16,7 +16,7 @@ function ConsoleList({ consoles }) {
       <h1>{platform.platform} Games</h1>
       <ul>
         {platform.games.map((game) => (
-          <li key={platform.id}>{game.title}</li>
+          <li key={game.id}>{game.title}</li>
         ))}
       </ul>
     </div>
