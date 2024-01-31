@@ -3,6 +3,8 @@ import { useRecoilState } from 'recoil';
 import { userState } from '../state/atoms/UserState';
 import axios from 'axios';
 
+import { Container, Row, Col } from 'react-bootstrap'
+
 function Profile() {
     const [currentUser, setCurrentUser]= useRecoilState(userState)
 
@@ -17,16 +19,19 @@ function Profile() {
         }
     }
 
-  return (
-    <div>
+  return(
+    <Container>
         <h1>My Profile</h1>
-        <hr></hr>
-        <h2>Welcome: {currentUser.username}</h2>
+        <h3>Welcome: {currentUser.username}</h3>
         <button onClick={handleLogOutClick}>Log Out</button>
-        <h3>My Games</h3>
-        <h3>My Consoles</h3>
-        <h3>My Genres</h3>
-    </div>
+        <hr></hr>
+        <Row>
+            <Col>My Games</Col>
+            <Col>My Consoles</Col>
+            <Col>My Genres</Col>
+        </Row>
+
+    </Container>
   )
 }
 
