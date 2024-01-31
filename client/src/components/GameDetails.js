@@ -11,7 +11,7 @@ function GameDetails({games}) {
     const gameId= Number(params.id)
     const game = games.find((g)=>g.id === gameId)
 
-    console.log(game)
+    // console.log(game)
 
   
   return (
@@ -22,8 +22,13 @@ function GameDetails({games}) {
             <img src={game.cover_art} />
             <p>Release Date: {game.release_date}</p>
             <p>Notes: {game.notes}</p>
+            
             <Link to={`/consoles/${game.console.id}/games`}>
                 <p>Platform: {game.console.platform}</p>
+            </Link>
+            
+            <Link to={`/genres/${game.genre.id}/games`}>
+                <p>Genre: {game.genre.genre_type}</p>
             </Link>
             </>
         ): (

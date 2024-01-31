@@ -22,6 +22,9 @@ function App() {
   const [consoles, setConsoles]= useState([])
   const [genres, setGenres] = useState([])
 
+  // console.log("Current User:", currentUser)
+  // console.log("Games Obj:", currentGameList)
+
   useEffect(()=>{
     axios.get('/me')
     .then(r =>{
@@ -72,14 +75,14 @@ function App() {
         <>
           <NavBar />
           <Routes>
-            <Route exact path="/" element={<Profile />} />
+            <Route exact path='/' element={<Profile />} />
             <Route exact path='/games' element={<GameList games={currentGameList} genres={genres} consoles={consoles}/>} />
             
             <Route exact path= '/games/:id' element={<GameDetails games={currentGameList} />}/>
             
             
-            <Route exact path="/consoles/:id/games" element={<ConsoleList  consoles={consoles} />} />
-            <Route exact path='/genres' element= {<GenreList genres={genres} />}/>
+            <Route exact path='/consoles/:id/games' element={<ConsoleList  consoles={consoles} />} />
+            <Route exact path='/genres/:id/games' element= {<GenreList genres={genres} />}/>
           </Routes>
         </>
       ) : (
