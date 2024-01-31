@@ -7,6 +7,10 @@ function GenreList({genres}) {
 
   const params = useParams()
   const genreId = Number(params.id)
+
+  if (!genres) {
+    return <div>Loading...</div>;
+  }
   const gameGenre = genres.find((genre)=> genre.id === genreId)
 
   console.log(gameGenre)

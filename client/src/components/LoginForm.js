@@ -26,16 +26,6 @@ function LoginForm() {
             });
         }}
       >
-        {/* {({ isSubmitting }) => (
-          <Form>
-            <Field type="username" name="username" placeholder="Username" />
-            <Field type="password" name="password" placeholder="Password" />
-            <button type="submit" disabled={isSubmitting}>
-              Login
-            </button>
-            <h1>{errors}</h1>
-          </Form>
-        )} */}
            <Form>
             <Field type="username" name="username" placeholder="Username" />
             <Field type="password" name="password" placeholder="Password" />

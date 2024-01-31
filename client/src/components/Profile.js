@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { useRecoilState } from 'recoil';
 import { userState } from '../state/atoms/UserState';
 import axios from 'axios';
@@ -7,8 +7,12 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 function Profile() {
     const [currentUser, setCurrentUser]= useRecoilState(userState)
+    
+    // console.log("Current User:", currentUser)
 
-    // console.log(currentUser)
+    const numGames = currentUser.games.length
+    const numConsoles= currentUser.consoles.length
+    const numGenres = currentUser.genres.length
 
     async function handleLogOutClick(){
         try{
@@ -26,10 +30,16 @@ function Profile() {
         <button onClick={handleLogOutClick}>Log Out</button>
         <hr></hr>
         <Row>
-            <Col>My Games</Col>
-            <Col>My Consoles</Col>
-            <Col>My Genres</Col>
+            <Col>My Games: {numGames}</Col>
+        </Row>  
+        <Row>
+            <Col>
+            {currentUser.games.map((game)=>(
+                <li key={game.id}>{game.title}</li>
+            ))}
+            </Col>
         </Row>
+        
 
     </Container>
   )
