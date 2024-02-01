@@ -11,15 +11,15 @@ function NewGame({ consoles, genres }) {
   
   const [errors, setErrors] = useState(null);
 
-  const consolesWithPlaceholder = [
-    { id: null, platform: "Choose Console" },
-    ...consoles,
-  ];
+  // const consolesWithPlaceholder = [
+  //   { id: null, platform: "Choose Console" },
+  //   ...consoles,
+  // ];
 
-  const genresWithPlaceholder = [
-    { id: null, genre_type: "Choose Genre" },
-    ...genres,
-  ];
+  // const genresWithPlaceholder = [
+  //   { id: null, genre_type: "Choose Genre" },
+  //   ...genres,
+  // ];
   
   return (
     <Formik
@@ -45,17 +45,19 @@ function NewGame({ consoles, genres }) {
             setErrors(null);
           })
           .catch((error) => {
+            console.log(error.response.data.errors)
             setErrors(error.response.data.errors)
             setSubmitting(true);
           });
+
       }}
     >
-        <Form>
-          <h1>{errors}</h1>
-         
+      
+        <Form>     
           <Field name="title" type="text" placeholder="Enter Game Title" />
+          <p>{errors[2]}</p>
           <Field name="cover_art" type="text" placeholder="Cover Art URL" />          
-          
+          <p>{errors[3]}.</p>
           <label htmlFor="release_date">Release Date:</label>
           <Field
             name="release_date"
@@ -63,6 +65,7 @@ function NewGame({ consoles, genres }) {
             placeholder="Release Date"
             id="release_date" 
           />
+          <p>{errors[4]}.</p>
 
           <Field
             as="select"
@@ -75,6 +78,7 @@ function NewGame({ consoles, genres }) {
               </option>
             ))}
           </Field>
+          <p>{errors[0]}.</p>
            
           <Field 
             as="select" 
@@ -86,7 +90,8 @@ function NewGame({ consoles, genres }) {
                 {g.genre_type}
               </option>
             ))}
-          </Field>   
+          </Field>
+          <p>{errors[1]}.</p> 
           <Field name="notes" type="text" placeholder="Notes" as="textarea" />
           <button type="submit">
             Add Game
