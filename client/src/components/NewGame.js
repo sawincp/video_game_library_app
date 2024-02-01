@@ -10,16 +10,6 @@ function NewGame({ consoles, genres }) {
   const [currentUser, setCurrentUser]= useRecoilState(userState)
   
   const [errors, setErrors] = useState(null);
-
-  // const consolesWithPlaceholder = [
-  //   { id: null, platform: "Choose Console" },
-  //   ...consoles,
-  // ];
-
-  // const genresWithPlaceholder = [
-  //   { id: null, genre_type: "Choose Genre" },
-  //   ...genres,
-  // ];
   
   return (
     <Formik
@@ -45,7 +35,7 @@ function NewGame({ consoles, genres }) {
             setErrors(null);
           })
           .catch((error) => {
-            console.log(error.response.data.errors)
+            console.log(error.response.data)
             setErrors(error.response.data.errors)
             setSubmitting(true);
           });
@@ -55,11 +45,11 @@ function NewGame({ consoles, genres }) {
       
         <Form>     
           <Field name="title" type="text" placeholder="Enter Game Title" />
-          {/* <p>{errors[2]}</p> */}
+          {errors && errors.includes("Title can't be blank") && <p className="error">Title can't be blank</p>}
           
-          <Field name="cover_art" type="url" placeholder="Cover Art URL" />          
-          {/* <p>{errors[3]}.</p> */}
-          
+          <Field name="cover_art" type="url" placeholder="Cover Art URL" />                    
+          {errors && errors.includes("Cover art can't be blank") && <p className="error">Cover art can't be blank</p>}
+
           <label htmlFor="release_date">Release Date:</label>
           <Field
             name="release_date"
@@ -67,7 +57,8 @@ function NewGame({ consoles, genres }) {
             placeholder="Release Date"
             id="release_date" 
           />
-          {/* <p>{errors[4]}.</p> */}
+          {errors && errors.includes("Release date can't be blank") && <p className="error">Release date can't be blank</p>}
+
 
           <Field
             as="select"
@@ -80,7 +71,8 @@ function NewGame({ consoles, genres }) {
               </option>
             ))}
           </Field>
-          {/* <p>{errors[0]}.</p> */}
+          {errors && errors.includes("Console must exist") && <p className="error">Console must exist</p>}
+
            
           <Field 
             as="select" 
@@ -93,7 +85,8 @@ function NewGame({ consoles, genres }) {
               </option>
             ))}
           </Field>
-          {/* <p>{errors[1]}.</p>  */}
+          {errors && errors.includes("Genre must exist") && <p className="error">Genre must exist</p>}
+
           
           <Field name="notes" type="text" placeholder="Notes" as="textarea" />
           <button type="submit">

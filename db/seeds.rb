@@ -45,7 +45,7 @@ Genre.create(genres)
         genre_id: 3 
       },
     
-      { title: "The Legend of Zelda: Breath of the Wild 2", 
+      { title: "The Legend of Zelda: Breath of the Wild", 
         cover_art: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg/220px-The_Legend_of_Zelda_Breath_of_the_Wild.jpg", 
         release_date: Date.new(2023, 3, 3), 
         notes: "Open-world adventure", 
