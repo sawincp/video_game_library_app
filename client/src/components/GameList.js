@@ -4,15 +4,7 @@ import NewGame from './NewGame'
 
 const GameList = ({games, consoles, genres }) => {
  
-  const [newGameForm, setNewGameForm]= useState(false)
-
-  if (!games) {
-    return <div>Loading...</div>;
-  }
-
-  function handleNewGameForm(){
-    setNewGameForm(!newGameForm)
-  }
+  console.log(games)
 
   const listOfGames = games.map((game) => {
     return (
@@ -25,12 +17,10 @@ const GameList = ({games, consoles, genres }) => {
   return (
     <div>
       <h1>Game Library</h1>
-      <button onClick={handleNewGameForm}>Add New Game!</button>
       <hr></hr>
-      {newGameForm ? (
         <NewGame consoles={consoles} genres={genres}/>
-      ): null}
-      {listOfGames}
+        {listOfGames}
+
     </div>
   )
 }
