@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
 
     before_action :authorize_note_user, only: [:update, :destroy]
+    before_action :authorize, except: [:index]
 
     def index
         render json: Game.all

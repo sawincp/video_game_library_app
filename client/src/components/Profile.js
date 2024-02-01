@@ -6,7 +6,9 @@ import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap'
 
 function Profile() {
+
     const [currentUser, setCurrentUser]= useRecoilState(userState)
+    const [errors, setErrors]= useState([])
     
     // console.log("Current User:", currentUser)
 
@@ -19,7 +21,7 @@ function Profile() {
             await axios.delete('/logout')
             setCurrentUser(null)
         } catch(error){
-            console.error("logout error:", error)
+            setErrors(error)
         }
     }
 
@@ -28,6 +30,7 @@ function Profile() {
         <h1>My Profile</h1>
         <h3>Welcome: {currentUser.username}</h3>
         <button onClick={handleLogOutClick}>Log Out</button>
+        <p>{errors}</p>
         <hr></hr>
         <Row>
             <Col>My Games: {numGames}</Col>

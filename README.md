@@ -16,7 +16,7 @@ This is a Video Game Library application built with a React frontend and a Rails
 - React Boostrap
 
 ## Backend
-- Ruby
+- Ruby version 3.0.0
 - Rails
 
 ### Database

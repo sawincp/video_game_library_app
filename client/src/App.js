@@ -10,8 +10,6 @@ import Profile from './components/Profile';
 import NavBar from './components/NavBar';
 import GameList from './components/GameList';
 import GameDetails from './components/GameDetails';
-
-
 import ConsoleList from './components/ConsoleList';
 import GenreList from './components/GenreList';
 
@@ -19,11 +17,12 @@ function App() {
 
   const [currentUser, setCurrentUser]= useRecoilState(userState)
   const [currentGameList, setCurrentGameList]= useRecoilState(gameListState)
+  const [games, setGames]= useState([])
   const [consoles, setConsoles]= useState([])
   const [genres, setGenres] = useState([])
 
   // console.log("Current User:", currentUser)
-  // console.log("Games Obj:", currentGameList)
+  
 
   useEffect(()=>{
     axios.get('/me')
@@ -35,16 +34,21 @@ function App() {
     })
   },[])
 
+  // games
   useEffect(() => {
     axios.get('/games')
       .then(response => {
-        setCurrentGameList(response.data);
+        setCurrentGameList(response.data)
+        // setGames(response.data);
       })
       .catch(error => {
         console.error(error);
       });
   }, []);
 
+  // console.log(currentGameList)
+
+  //consoles
   useEffect(()=>{
     axios.get('/consoles')
     .then(response =>{
@@ -56,6 +60,9 @@ function App() {
     })
   },[])
 
+
+
+  // genres
   useEffect(()=>{
     axios.get('/genres')
     .then(response => {
@@ -76,7 +83,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route exact path='/' element={<Profile />} />
-            <Route exact path='/games' element={<GameList games={currentGameList} genres={genres} consoles={consoles}/>} />
+            <Route exact path='/games' element={<GameList genres={genres} consoles={consoles}/>} />
             
             <Route exact path= '/games/:id' element={<GameDetails games={currentGameList} />}/>
             

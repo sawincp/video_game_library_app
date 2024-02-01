@@ -37,7 +37,7 @@ function GameDetails() {
         {game ? (
             <>
             <h1>{game.title}</h1>
-            <img src={game.cover_art} />
+            <img src={game.cover_art} alt='coverArt'/>
             <p>Platform: {game.console.platform}</p>
             <p>Genre: {game.genre.genre_type}</p>
             <p>Release Date: {game.release_date}</p>
