@@ -3,12 +3,16 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { gameListState } from '../state/atoms/GameListState';
+import { userState } from '../state/atoms/UserState';
 import EditNoteForm from './EditNoteForm'
 import axios from 'axios';
 
 
 function GameDetails() {
     const [games, setGames]=useRecoilState(gameListState)
+
+    const currentUser = useRecoilValue(userState)
+    const currentUserId = currentUser.id    
     
     const [isEditing, setIsEditing]= useState(false)
     const [error, setError] = useState(null);
@@ -31,43 +35,45 @@ function GameDetails() {
         //   setError();
         }
       };
-
-  return (
-    <div>
-        {game ? (
+      
+      return (
+        <div>
+          {game ? (
             <>
-            <h1>{game.title}</h1>
-            <img src={game.cover_art} alt='coverArt'/>
-            <p>Platform: {game.console.platform}</p>
-            <p>Genre: {game.genre.genre_type}</p>
-            <p>Release Date: {game.release_date}</p>
-            <p>Notes For User: {game.user.username}</p>
-            {game.notes}
-            
-            <button onClick={()=> setIsEditing((isEditing)=>!isEditing)}>
-                <span role="img" aria-label="edit">✏️</span>
-            </button>
-            <button onClick={handleDeleteNote}>
-                <span role="img" aria-label="delete">
+              <h1>{game.title}</h1>
+              <img src={game.cover_art} alt="coverArt" />
+              <p>Platform: {game.console.platform}</p>
+              <p>Genre: {game.genre.genre_type}</p>
+              <p>Release Date: {game.release_date}</p>
+              <p>Notes For User: {game.user.username}</p>
+              {game.notes}
+      
+              {currentUserId === game.user.id && (
+                <>
+                  <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                    <span role="img" aria-label="edit">✏️</span>
+                  </button>
+                  <button onClick={handleDeleteNote}>
+                    <span role="img" aria-label="delete">
                     🗑
-                </span>
-            </button>
-            {isEditing ?(
-                <EditNoteForm gameId={gameId} />
-            ): null}
-            
-            <Link to={`/consoles/${game.console.id}/games`}>
+                    </span>
+                  </button>
+                  {isEditing && <EditNoteForm gameId={gameId} />}
+                </>
+              )}
+      
+              <Link to={`/consoles/${game.console.id}/games`}>
                 <p>Find More Games on: {game.console.platform}</p>
-            </Link>
-            <Link to={`/genres/${game.genre.id}/games`}>
+              </Link>
+              <Link to={`/genres/${game.genre.id}/games`}>
                 <p>Find More Games like: {game.genre.genre_type}</p>
-            </Link>
+              </Link>
             </>
-        ): (
+          ) : (
             <p>Game not found</p>
-        )}
-    </div>
-  );
+          )}
+        </div>
+      );
 }
 
 export default GameDetails;
