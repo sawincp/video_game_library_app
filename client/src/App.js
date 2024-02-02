@@ -16,6 +16,8 @@ import ConsoleList from './components/ConsoleList';
 import GenreList from './components/GenreList';
 import AllConsoles from './components/AllConsoles';
 import AllGenres from './components/AllGenres';
+import NewConsole from './components/NewConsole';
+import NewGenre from './components/NewGenre';
 
 function App() {
 
@@ -86,7 +88,9 @@ function App() {
             <Route exact path='/' element={<Profile />} />
             <Route exact path='/games' element={<GameList />} />
             <Route exact path ='/consoles' element={<AllConsoles/>}/>
+            <Route exact path ='/consoles/new' element={<NewConsole />}/>
             <Route exact path ='/genres' element={<AllGenres/>} />
+            <Route exact path = '/genres/new' element={<NewGenre />}/>
             <Route exact path= '/games/:id' element={<GameDetails />}/>
             <Route exact path='/consoles/:id/games' element={<ConsoleList />} />
             <Route exact path='/genres/:id/games' element= {<GenreList />}/>

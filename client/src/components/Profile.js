@@ -13,8 +13,6 @@ function Profile() {
     // console.log("Current User:", currentUser)
 
     const numGames = currentUser.games.length
-    const numConsoles= currentUser.consoles.length
-    const numGenres = currentUser.genres.length
 
     async function handleLogOutClick(){
         try{

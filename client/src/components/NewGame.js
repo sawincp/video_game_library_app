@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import { Formik, Field, Form, resetForm } from 'formik';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { gameListState } from '../state/atoms/GameListState';
@@ -12,14 +13,11 @@ function NewGame({ genres }) {
   const [gameList, setGameList] = useRecoilState(gameListState);
   const [currentUser, setCurrentUser]= useRecoilState(userState)
   const consoles = useRecoilValue(consoleState)
-  const [addNewConsoleForm, setAddNewConsoleForm]= useState(false)
   
   const [errors, setErrors] = useState(null);
 
+  console.log(gameList) 
 
-  const handleAddNewConsole = () =>{
-   setAddNewConsoleForm(!addNewConsoleForm)
-  }  
   return (
     <Formik
       initialValues={{
@@ -81,13 +79,8 @@ function NewGame({ genres }) {
             ))}
           </Field>
           {errors && errors.includes("Console must exist") && <p className="error">Console must exist</p>}
+            <Link to='/consoles/new'>Add New Console</Link>
           
-          <button onClick={handleAddNewConsole}>Add New Console</button>
-          
-          {addNewConsoleForm? (
-            <NewConsole />
-          ): null}
-           
           <Field 
             as="select" 
             name="genre_id"
@@ -100,7 +93,7 @@ function NewGame({ genres }) {
             ))}
           </Field>
           {errors && errors.includes("Genre must exist") && <p className="error">Genre must exist</p>}
-          <button>Add New Genre</button>
+          <Link to='/genres/new'>Add New Genre</Link>
           
           <Field name="notes" type="text" placeholder="Notes" as="textarea" />
           <button type="submit">

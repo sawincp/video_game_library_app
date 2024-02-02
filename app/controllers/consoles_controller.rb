@@ -8,7 +8,7 @@ class ConsolesController < ApplicationController
 
     def create
         console = Console.create!(console_params)
-        render json :console, status: :created
+        render json: console, status: :created
     end
 
     private
