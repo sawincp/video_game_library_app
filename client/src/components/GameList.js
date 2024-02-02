@@ -4,9 +4,13 @@ import { gameListState } from '../state/atoms/GameListState';
 import { Link } from 'react-router-dom';
 import NewGame from './NewGame'
 
+import { Container, Row, Col } from 'react-bootstrap'
+
 const GameList = ({ consoles, genres }) => {
 
   const games = useRecoilValue(gameListState)
+
+  console.log(games)
 
   const [newGameForm, setNewGameForm]= useState(false)
  
@@ -20,27 +24,31 @@ const GameList = ({ consoles, genres }) => {
     setNewGameForm(!newGameForm)
 }  
 
-const listOfGames = games.map((game) => {
-    return (
-      <div key={game.id}>
-        <Link to={`/games/${game.id}`}>{game.title}</Link>
-      </div>
-    );
-  });
 
-  return (
-    <div>
-      <h1>Game Library</h1>
-      <button onClick={handleNewGameForm}>Add Game!</button>
-      <hr></hr>
-      {newGameForm ? (
-        <NewGame consoles={consoles} genres={genres}/>
+return (
+  <Container>
+    <h1>Game Library</h1>
+    <button onClick={handleNewGameForm}>Add Game!</button>
+    <hr />
 
-      ): null }
-        {listOfGames}
+    {newGameForm ? (
+      <NewGame consoles={consoles} genres={genres} />
+    ) : null}
 
-    </div>
-  )
+    <Row className="game-list"> 
+      {games.map((game) => (
+        <Col key={game.id}>
+          
+          <Link to={`/games/${game.id}`} className="game-title">
+            {game.title}
+          </Link>
+          <hr></hr>
+          <img src={game.cover_art} alt='cover_art'/>
+        </Col>
+      ))}
+    </Row>
+  </Container>
+);
 }
 
 export default GameList
