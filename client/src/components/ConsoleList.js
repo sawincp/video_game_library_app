@@ -1,7 +1,11 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { consoleState } from '../state/atoms/ConsoleState';
 import { useParams } from 'react-router-dom';
 
-function ConsoleList({ consoles }) {
+function ConsoleList(){
+
+  const consoles = useRecoilValue(consoleState)
   
   const params = useParams()
   const consoleId = Number(params.id)

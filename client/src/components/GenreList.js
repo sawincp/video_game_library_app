@@ -1,9 +1,11 @@
 import React from 'react'
+import { useRecoilValue } from 'recoil'
+import { genreState } from '../state/atoms/GenreState'
 import { useParams } from 'react-router-dom'
 
-function GenreList({genres}) {
+function GenreList() {
 
-  console.log(genres)
+  const genres = useRecoilValue(genreState)
 
   const params = useParams()
   const genreId = Number(params.id)

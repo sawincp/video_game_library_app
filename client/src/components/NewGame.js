@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form, resetForm } from 'formik';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { gameListState } from '../state/atoms/GameListState';
 import { userState } from '../state/atoms/UserState';
-import axios from 'axios';
+import { consoleState } from '../state/atoms/ConsoleState';
 
-function NewGame({ consoles, genres }) {
+import axios from 'axios';
+import NewConsole from './NewConsole';
+
+function NewGame({ genres }) {
   const [gameList, setGameList] = useRecoilState(gameListState);
   const [currentUser, setCurrentUser]= useRecoilState(userState)
+  const consoles = useRecoilValue(consoleState)
+  const [addNewConsoleForm, setAddNewConsoleForm]= useState(false)
   
   const [errors, setErrors] = useState(null);
-  
+
+
+  const handleAddNewConsole = () =>{
+   setAddNewConsoleForm(!addNewConsoleForm)
+  }  
   return (
     <Formik
       initialValues={{
@@ -72,7 +81,12 @@ function NewGame({ consoles, genres }) {
             ))}
           </Field>
           {errors && errors.includes("Console must exist") && <p className="error">Console must exist</p>}
-
+          
+          <button onClick={handleAddNewConsole}>Add New Console</button>
+          
+          {addNewConsoleForm? (
+            <NewConsole />
+          ): null}
            
           <Field 
             as="select" 
@@ -86,7 +100,7 @@ function NewGame({ consoles, genres }) {
             ))}
           </Field>
           {errors && errors.includes("Genre must exist") && <p className="error">Genre must exist</p>}
-
+          <button>Add New Genre</button>
           
           <Field name="notes" type="text" placeholder="Notes" as="textarea" />
           <button type="submit">

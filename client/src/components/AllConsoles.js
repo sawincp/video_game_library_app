@@ -1,8 +1,10 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { consoleState } from '../state/atoms/ConsoleState';
 
-function AllConsoles({ consoles }) {
+function AllConsoles() {
   
-    // console.log("Consoles", consoles);
+    const consoles = useRecoilValue(consoleState)
 
   return (
     <div>

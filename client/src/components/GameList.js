@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import { useRecoilValue } from 'recoil';
 import { gameListState } from '../state/atoms/GameListState';
+import { genreState } from '../state/atoms/GenreState';
+import { consoleState } from '../state/atoms/ConsoleState';
 import { Link } from 'react-router-dom';
 import NewGame from './NewGame'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
-const GameList = ({ consoles, genres }) => {
+const GameList = () => {
 
   const games = useRecoilValue(gameListState)
+  const genres = useRecoilValue(genreState)
+  const consoles = useRecoilValue(consoleState)
 
-  console.log(games)
+  console.log(consoles)
 
   const [newGameForm, setNewGameForm]= useState(false)
  
@@ -18,12 +22,9 @@ const GameList = ({ consoles, genres }) => {
     return<p>Loading....</p>
   }
 
-  console.log(games)
-
   const handleNewGameForm = ()=>{
     setNewGameForm(!newGameForm)
 }  
-
 
 return (
   <Container>

@@ -1,6 +1,10 @@
 import React from 'react'
+import { useRecoilValue } from 'recoil'
+import { genreState} from '../state/atoms/GenreState'
+function AllGenres() {
 
-function AllGenres({genres}) {
+  const genres = useRecoilValue(genreState)
+  
   return (
     <div>
         <h1>Total Genres </h1>

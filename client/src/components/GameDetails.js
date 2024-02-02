@@ -22,7 +22,7 @@ function GameDetails() {
     const gameList = useRecoilValue(gameListState);
     const game = gameList.find((g)=>g.id === gameId)
 
-    console.log(game)
+    // console.log(game)
 
     const handleDeleteNote = async () => {
         try {
