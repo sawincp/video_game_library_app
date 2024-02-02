@@ -12,12 +12,13 @@ import GameList from './components/GameList';
 import GameDetails from './components/GameDetails';
 import ConsoleList from './components/ConsoleList';
 import GenreList from './components/GenreList';
+import AllConsoles from './components/AllConsoles';
+import AllGenres from './components/AllGenres';
 
 function App() {
 
   const [currentUser, setCurrentUser]= useRecoilState(userState)
   const [currentGameList, setCurrentGameList]= useRecoilState(gameListState)
-  const [games, setGames]= useState([])
   const [consoles, setConsoles]= useState([])
   const [genres, setGenres] = useState([])
 
@@ -60,8 +61,6 @@ function App() {
     })
   },[])
 
-
-
   // genres
   useEffect(()=>{
     axios.get('/genres')
@@ -84,10 +83,9 @@ function App() {
           <Routes>
             <Route exact path='/' element={<Profile />} />
             <Route exact path='/games' element={<GameList genres={genres} consoles={consoles}/>} />
-            
+            <Route exact path ='/consoles' element={<AllConsoles consoles={consoles} />}/>
+            <Route exact path ='/genres' element={<AllGenres genres={genres} />} />
             <Route exact path= '/games/:id' element={<GameDetails games={currentGameList} />}/>
-            
-            
             <Route exact path='/consoles/:id/games' element={<ConsoleList  consoles={consoles} />} />
             <Route exact path='/genres/:id/games' element= {<GenreList genres={genres} />}/>
           </Routes>
