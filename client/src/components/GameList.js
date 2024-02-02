@@ -34,6 +34,7 @@ return (
     {newGameForm ? (
       <NewGame consoles={consoles} genres={genres} />
     ) : null}
+    <hr></hr>
 
     <Row className="game-list"> 
       {games.map((game) => (
